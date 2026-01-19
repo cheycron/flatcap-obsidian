@@ -5,7 +5,7 @@
 **[Flatcap](https://github.com/cheycron/flatcap-theme)** is a design system and color scheme tailored for application interfaces, code editors, and data-dense dashboards. Drawing inspiration from the *Nord theme*, it embraces principles of calm, clean aesthetics, and a dimmed pastel color approach to reduce eye strain during long coding or administration sessions.
 
 <p align="center">
-  <img src="https://github.com/cheycron/flat-cap-theme/blob/main/images/demo_obsidian.png?raw=true" alt="Flatcap Obsidian"/>
+  <img src="screenshot.png" alt="Flatcap Obsidian" width="100%"/>
 </p>
 
 ## 🚀 How to Install
