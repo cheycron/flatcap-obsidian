@@ -1,6 +1,6 @@
 # [Flatcap](https://github.com/cheycron/flatcap-theme) for Obsidian
 
-![Version](https://img.shields.io/badge/version-1.1.1-blueviolet) ![License](https://img.shields.io/badge/license-MIT-blue) ![Downloads](https://img.shields.io/obsidian/downloads/theme/FlatCap?color=81a1c1&logo=obsidian)
+![Version](https://img.shields.io/badge/version-1.1.1-blueviolet) ![License](https://img.shields.io/badge/license-MIT-blue)
 
 **[Flatcap](https://github.com/cheycron/flatcap-theme)** is a design system and color scheme tailored for application interfaces, code editors, and data-dense dashboards. Drawing inspiration from the *Nord theme*, it embraces principles of calm, clean aesthetics, and a dimmed pastel color approach to reduce eye strain during long coding or administration sessions.
 
