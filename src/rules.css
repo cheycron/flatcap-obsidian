@@ -1,0 +1,624 @@
+/*=== 1. Foundation (modes share every rule below) ===============
+ * scripts/build.py emits --fc-* roles on .theme-dark (Slate) and .theme-light
+ * (Daylight). Everything here maps Flatcap intent onto Obsidian's documented
+ * CSS variables; no literal colors live in this file.
+ *   surfaces : canvas = app chrome (sidebars, tabs, title bar),
+ *              surface = the note you read and write,
+ *              raised = floating layers (menus, dialogs, fields, buttons),
+ *              hover / selected = interaction states
+ *   borders  : subtle = dividers, control = anything you must see to operate
+ */
+body {
+	--fc-ease-state: cubic-bezier(0.2, 0, 0, 1);
+	--fc-ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+	--fc-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+	/* Typography. *-theme variables yield to the user's own font settings. */
+	--font-interface-theme: var(--fc-font-ui);
+	--font-text-theme: var(--fc-font-ui);
+	--font-monospace-theme: var(--fc-font-code);
+	--font-ui-smaller: var(--fc-font-size-meta);
+	--font-ui-small: var(--fc-font-size-control);
+	--font-ui-medium: var(--fc-font-size-body);
+	--line-height-normal: var(--fc-font-line-reading);
+	--line-height-tight: var(--fc-font-line-control);
+	--file-line-width: var(--fc-reading-width);
+	--bold-modifier: 200;
+	--code-size: var(--fc-font-size-code-em);
+
+	--inline-title-size: var(--fc-font-size-title-em);
+	--inline-title-weight: var(--fc-font-weight-semibold);
+	--inline-title-line-height: 1.3;
+	--h1-size: var(--fc-font-size-title-em);
+	--h2-size: var(--fc-font-size-heading-em);
+	--h3-size: 1em;
+	--h4-size: 1em;
+	--h5-size: var(--fc-font-size-control-em);
+	--h6-size: var(--fc-font-size-control-em);
+	--h1-weight: var(--fc-font-weight-semibold);
+	--h2-weight: var(--fc-font-weight-semibold);
+	--h3-weight: var(--fc-font-weight-semibold);
+	--h4-weight: var(--fc-font-weight-medium);
+	--h5-weight: var(--fc-font-weight-medium);
+	--h6-weight: var(--fc-font-weight-medium);
+	--h1-line-height: 1.3;
+	--h2-line-height: 1.3;
+	--h3-line-height: 1.3;
+	--h4-line-height: 1.3;
+	--h5-line-height: 1.3;
+	--h6-line-height: 1.3;
+	--h1-color: var(--text-normal);
+	--h2-color: var(--text-normal);
+	--h3-color: var(--text-normal);
+	--h4-color: var(--text-muted);
+	--h5-color: var(--text-muted);
+	--h6-color: var(--text-faint);
+
+	/* Metrics */
+	--radius-s: var(--fc-radius-control);
+	--radius-m: var(--fc-radius-panel);
+	--radius-l: var(--fc-radius-dialog);
+	--input-height: var(--fc-control-min-height-compact);
+	--border-width: var(--fc-border-width);
+	--input-radius: var(--fc-radius-control);
+	--button-radius: var(--fc-radius-control);
+
+	/* Motion: Obsidian exposes these hooks for buttons, dropdowns and fields. */
+	--button-transition: background-color var(--fc-motion-fast) var(--fc-ease-state), box-shadow var(--fc-motion-fast) var(--fc-ease-state), color var(--fc-motion-fast) var(--fc-ease-state);
+	--dropdown-transition: background-color var(--fc-motion-fast) var(--fc-ease-state), box-shadow var(--fc-motion-fast) var(--fc-ease-state);
+	--input-transition: border-color var(--fc-motion-fast) var(--fc-ease-state), box-shadow var(--fc-motion-fast) var(--fc-ease-state), background-color var(--fc-motion-fast) var(--fc-ease-state);
+}
+
+body.is-mobile {
+	--input-height: var(--fc-control-min-height-comfortable);
+}
+
+.theme-dark,
+.theme-light {
+	/* Palette, by intent */
+	--color-red: var(--fc-danger-fg);
+	--color-orange: var(--fc-data-4);
+	--color-yellow: var(--fc-warning-fg);
+	--color-green: var(--fc-success-fg);
+	--color-cyan: var(--fc-data-5);
+	--color-blue: var(--fc-data-1);
+	--color-purple: var(--fc-data-3);
+	--color-pink: var(--fc-data-3);
+	--color-red-rgb: var(--fc-danger-rgb);
+	--color-green-rgb: var(--fc-success-rgb);
+	--color-yellow-rgb: var(--fc-warning-rgb);
+	--color-blue-rgb: var(--fc-accent-rgb);
+	--background-modifier-error-rgb: var(--fc-danger-rgb);
+	--background-modifier-success-rgb: var(--fc-success-rgb);
+
+	--accent-h: var(--fc-accent-h);
+	--accent-s: var(--fc-accent-s);
+	--accent-l: var(--fc-accent-l);
+	--color-accent: var(--fc-accent-fill);
+	--color-accent-1: var(--fc-accent-hover);
+	--color-accent-2: var(--fc-accent-pressed);
+
+	/* Surfaces */
+	--background-primary: var(--fc-bg-surface);
+	--background-primary-alt: var(--fc-bg-canvas);
+	--background-secondary: var(--fc-bg-canvas);
+	--background-secondary-alt: var(--fc-bg-raised);
+	--interactive-normal: var(--fc-bg-raised);
+	--interactive-hover: var(--fc-bg-hover);
+	--background-modifier-form-field: var(--fc-bg-raised);
+	--background-modifier-hover: var(--fc-bg-hover);
+	--background-modifier-active-hover: var(--fc-bg-selected);
+	--background-modifier-cover: var(--fc-scrim);
+	--background-modifier-message: var(--fc-bg-raised);
+	--background-modifier-box-shadow: var(--fc-shadow-overlay);
+
+	/* Borders and focus */
+	--background-modifier-border: var(--fc-border-subtle);
+	--background-modifier-border-hover: var(--fc-border-control);
+	--background-modifier-border-focus: var(--fc-focus-ring);
+	--divider-color: var(--fc-border-subtle);
+	--divider-color-hover: var(--fc-accent-fg);
+	--hr-color: var(--fc-border-subtle);
+	--hr-thickness: 1px;
+
+	/* Text */
+	--text-normal: var(--fc-text-primary);
+	--text-muted: var(--fc-text-secondary);
+	--text-faint: var(--fc-text-muted);
+	--text-on-accent: var(--fc-accent-on);
+	--text-on-accent-inverted: var(--fc-accent-on);
+	--text-accent: var(--fc-accent-fg);
+	--text-accent-hover: var(--fc-accent-hover);
+	--text-error: var(--fc-danger-fg);
+	--text-warning: var(--fc-warning-fg);
+	--text-success: var(--fc-success-fg);
+	--text-selection: var(--fc-selection-bg);
+	--text-highlight-bg: var(--fc-warning-bg);
+	--highlight-mix-blend-mode: normal;
+	--interactive-accent: var(--fc-accent-fill);
+	--interactive-accent-hover: var(--fc-accent-hover);
+
+	/* Status */
+	--background-modifier-error: var(--fc-danger-fg);
+	--background-modifier-error-hover: color-mix(in srgb, var(--fc-danger-fg) 85%, var(--fc-text-primary) 15%);
+	--background-modifier-success: var(--fc-success-fg);
+	--background-modifier-warning: var(--fc-warning-fg);
+	--background-modifier-warning-hover: var(--fc-warning-fg);
+
+	/* Links: always underlined; unresolved ones are dashed, never faded */
+	--link-color: var(--fc-accent-fg);
+	--link-color-hover: var(--fc-accent-hover);
+	--link-external-color: var(--fc-accent-fg);
+	--link-external-color-hover: var(--fc-accent-hover);
+	--link-decoration: underline;
+	--link-decoration-hover: underline;
+	--link-unresolved-color: var(--fc-accent-fg);
+	--link-unresolved-opacity: 1;
+	--link-unresolved-decoration-style: dashed;
+	--link-unresolved-decoration-color: var(--fc-accent-fg);
+
+	/* Controls: a boundary you can see, shaped by shadow so layout stays put */
+	--input-shadow: inset 0 0 0 1px var(--fc-border-control);
+	--input-shadow-hover: inset 0 0 0 1px var(--fc-text-secondary);
+	--checkbox-color: var(--fc-accent-fill);
+	--checkbox-color-hover: var(--fc-accent-hover);
+	--checkbox-marker-color: var(--fc-accent-on);
+	--checkbox-border-color: var(--fc-border-control);
+	--checkbox-border-color-hover: var(--fc-text-secondary);
+	--checklist-done-color: var(--fc-text-muted);
+	--toggle-thumb-color: var(--fc-accent-on);
+	--slider-track-background: var(--fc-border-control);
+	--slider-thumb-background: var(--fc-accent-fill);
+	--slider-thumb-background-hover: var(--fc-accent-hover);
+	--scrollbar-thumb-bg: var(--fc-border-subtle);
+	--scrollbar-active-thumb-bg: var(--fc-border-control);
+
+	/* Icons */
+	--icon-color: var(--fc-text-secondary);
+	--icon-color-hover: var(--fc-text-primary);
+	--icon-color-active: var(--fc-accent-fg);
+	--icon-color-focused: var(--fc-text-primary);
+	--icon-opacity: 1;
+	--icon-opacity-hover: 1;
+	--icon-opacity-active: 1;
+
+	/* Navigation: file explorer, tabs, title and status bars */
+	--nav-item-color: var(--fc-text-secondary);
+	--nav-item-color-hover: var(--fc-text-primary);
+	--nav-item-color-active: var(--fc-text-primary);
+	--nav-item-color-selected: var(--fc-text-primary);
+	--nav-item-color-highlighted: var(--fc-accent-fg);
+	--nav-item-background-hover: var(--fc-bg-hover);
+	--nav-item-background-active: var(--fc-bg-selected);
+	--nav-item-background-selected: var(--fc-bg-selected);
+	--nav-item-weight-active: var(--fc-font-weight-medium);
+	--nav-heading-color: var(--fc-text-primary);
+	--nav-heading-color-hover: var(--fc-text-primary);
+	--nav-heading-color-collapsed: var(--fc-text-muted);
+	--nav-heading-color-collapsed-hover: var(--fc-text-secondary);
+	--nav-collapse-icon-color: var(--fc-text-muted);
+	--nav-collapse-icon-color-collapsed: var(--fc-text-muted);
+	--nav-indentation-guide-color: var(--fc-border-subtle);
+	--indentation-guide-color: var(--fc-border-subtle);
+	--indentation-guide-color-active: var(--fc-border-control);
+	--tab-container-background: var(--fc-bg-canvas);
+	--tab-text-color: var(--fc-text-muted);
+	--tab-text-color-active: var(--fc-text-secondary);
+	--tab-text-color-focused: var(--fc-text-secondary);
+	--tab-text-color-focused-active: var(--fc-text-secondary);
+	--tab-text-color-focused-active-current: var(--fc-text-primary);
+	--tab-text-color-focused-highlighted: var(--fc-accent-fg);
+	--tab-outline-color: var(--fc-border-subtle);
+	--titlebar-background: var(--fc-bg-canvas);
+	--titlebar-background-focused: var(--fc-bg-canvas);
+	--titlebar-text-color: var(--fc-text-secondary);
+	--titlebar-text-color-focused: var(--fc-text-primary);
+	--titlebar-text-weight: var(--fc-font-weight-medium);
+	--status-bar-background: var(--fc-bg-canvas);
+	--status-bar-text-color: var(--fc-text-secondary);
+	--status-bar-border-color: var(--fc-border-subtle);
+	--ribbon-background: var(--fc-bg-canvas);
+	--ribbon-background-collapsed: var(--fc-bg-surface);
+	--file-header-background: var(--fc-bg-surface);
+	--file-header-background-focused: var(--fc-bg-surface);
+	--file-header-font-weight: var(--fc-font-weight-regular);
+
+	/* Floating layers */
+	--shadow-s: var(--fc-shadow-overlay);
+	--shadow-l: var(--fc-shadow-overlay);
+	--menu-background: var(--fc-bg-raised);
+	--menu-border-color: var(--fc-border-subtle);
+	--menu-shadow: var(--fc-shadow-overlay);
+	--menu-radius: var(--fc-radius-panel);
+	--modal-background: var(--fc-bg-raised);
+	--modal-sidebar-background: var(--fc-bg-canvas);
+	--modal-border-color: var(--fc-border-subtle);
+	--modal-shadow: var(--fc-shadow-overlay);
+	--modal-radius: var(--fc-radius-dialog);
+	--prompt-background: var(--fc-bg-raised);
+	--prompt-border-color: var(--fc-border-subtle);
+	--tooltip-background: var(--fc-bg-raised);
+	--tooltip-color: var(--fc-text-primary);
+	--tooltip-shadow: var(--fc-shadow-overlay);
+	--tooltip-radius: var(--fc-radius-control);
+	--notice-background: var(--fc-bg-raised);
+	--notice-color: var(--fc-text-primary);
+	--notice-border: var(--fc-border-width) solid var(--fc-border-subtle);
+	--notice-shadow: var(--fc-shadow-overlay);
+	--notice-radius: var(--fc-radius-panel);
+	--setting-items-border-color: var(--fc-border-subtle);
+	--setting-items-divider-color: var(--fc-border-subtle);
+	--drag-ghost-background: var(--fc-bg-raised);
+	--drag-ghost-text-color: var(--fc-text-primary);
+	--drag-item-background: var(--fc-bg-selected);
+
+	/* Reading and writing */
+	--bold-color: inherit;
+	--blockquote-border-color: var(--fc-border-control);
+	--blockquote-color: var(--fc-text-secondary);
+	--embed-border-start: 2px solid var(--fc-border-control);
+	--list-marker-color: var(--fc-text-muted);
+	--list-marker-color-hover: var(--fc-text-secondary);
+	--list-marker-color-collapsed: var(--fc-accent-fg);
+	--footnote-id-color: var(--fc-accent-fg);
+	--tag-color: var(--fc-accent-fg);
+	--tag-color-hover: var(--fc-accent-hover);
+	--tag-background: var(--fc-bg-selected);
+	--tag-background-hover: var(--fc-bg-hover);
+	--tag-border-color: var(--fc-border-subtle);
+	--tag-border-color-hover: var(--fc-accent-fg);
+	--tag-border-width: 1px;
+	--tag-radius: var(--fc-radius-control);
+	--tag-weight: var(--fc-font-weight-medium);
+	--metadata-border-color: var(--fc-border-subtle);
+	--metadata-label-text-color: var(--fc-text-secondary);
+	--metadata-input-text-color: var(--fc-text-primary);
+	--nav-tag-color: var(--fc-text-muted);
+	--nav-tag-color-hover: var(--fc-text-secondary);
+	--nav-tag-color-active: var(--fc-text-secondary);
+
+	/* Tables */
+	--table-border-color: var(--fc-border-subtle);
+	--table-header-color: var(--fc-text-primary);
+	--table-header-weight: var(--fc-font-weight-semibold);
+	--table-row-background-hover: var(--fc-bg-hover);
+	--table-selection: var(--fc-bg-selected);
+	--table-selection-blend-mode: normal;
+	--table-selection-border-color: var(--fc-accent-fg);
+	--table-drag-handle-color: var(--fc-text-muted);
+	--table-drag-handle-color-active: var(--fc-accent-on);
+	--bases-table-border-color: var(--fc-border-subtle);
+	--bases-table-header-color: var(--fc-text-secondary);
+	--bases-table-header-background: var(--fc-bg-surface);
+	--bases-table-group-background: var(--fc-bg-canvas);
+	--bases-table-row-background-hover: var(--fc-bg-hover);
+	--bases-table-cell-background-selected: var(--fc-bg-selected);
+	--bases-cards-background: var(--fc-bg-surface);
+	--bases-kanban-card-background: var(--fc-bg-surface);
+	--bases-kanban-column-background: var(--fc-bg-canvas);
+
+	/* Code */
+	--code-background: var(--fc-bg-canvas);
+	--code-bracket-background: var(--fc-bg-hover);
+	--code-border-width: 1px;
+	--code-border-color: var(--fc-border-subtle);
+	--code-radius: var(--fc-radius-control);
+	--code-normal: var(--fc-text-primary);
+	--code-comment: var(--fc-syntax-comment);
+	--code-keyword: var(--fc-syntax-keyword);
+	--code-tag: var(--fc-syntax-keyword);
+	--code-function: var(--fc-syntax-function);
+	--code-string: var(--fc-syntax-string);
+	--code-value: var(--fc-syntax-number);
+	--code-property: var(--fc-syntax-type);
+	--code-important: var(--fc-syntax-type);
+	--code-operator: var(--fc-text-secondary);
+	--code-punctuation: var(--fc-text-secondary);
+
+	/* Graph and canvas: categorical series come from data.* */
+	--graph-line: var(--fc-border-control);
+	--graph-node: var(--fc-text-secondary);
+	--graph-node-unresolved: var(--fc-border-control);
+	--graph-node-focused: var(--fc-accent-fg);
+	--graph-node-tag: var(--fc-data-2);
+	--graph-node-attachment: var(--fc-data-6);
+	--graph-text: var(--fc-text-primary);
+	--canvas-background: var(--fc-bg-canvas);
+	--canvas-dot-pattern: var(--fc-border-subtle);
+	--canvas-card-label-color: var(--fc-text-muted);
+	--canvas-color-1: var(--fc-danger-fg);
+	--canvas-color-2: var(--fc-data-4);
+	--canvas-color-3: var(--fc-data-6);
+	--canvas-color-4: var(--fc-data-2);
+	--canvas-color-5: var(--fc-data-5);
+	--canvas-color-6: var(--fc-data-3);
+
+	/* Callouts */
+	--callout-default: var(--fc-info-fg);
+	--callout-info: var(--fc-info-fg);
+	--callout-summary: var(--fc-info-fg);
+	--callout-todo: var(--fc-info-fg);
+	--callout-important: var(--fc-info-fg);
+	--callout-tip: var(--fc-success-fg);
+	--callout-success: var(--fc-success-fg);
+	--callout-question: var(--fc-warning-fg);
+	--callout-warning: var(--fc-warning-fg);
+	--callout-fail: var(--fc-danger-fg);
+	--callout-error: var(--fc-danger-fg);
+	--callout-bug: var(--fc-danger-fg);
+	--callout-example: var(--fc-data-3);
+	--callout-quote: var(--fc-text-secondary);
+	--callout-radius: var(--fc-radius-panel);
+	--callout-blend-mode: normal;
+	--callout-title-color: var(--callout-color);
+}
+
+/* Greys that Obsidian reads straight from its base ramp (a few plugins and
+ * unmapped surfaces). Ordered by lightness within each mode. */
+.theme-dark {
+	--color-base-00: var(--fc-bg-canvas);
+	--color-base-05: var(--fc-bg-canvas);
+	--color-base-10: var(--fc-bg-surface);
+	--color-base-20: var(--fc-bg-surface);
+	--color-base-25: var(--fc-bg-raised);
+	--color-base-30: var(--fc-bg-hover);
+	--color-base-35: var(--fc-border-subtle);
+	--color-base-40: var(--fc-border-subtle);
+	--color-base-50: var(--fc-text-disabled);
+	--color-base-60: var(--fc-text-muted);
+	--color-base-70: var(--fc-text-secondary);
+	--color-base-100: var(--fc-text-primary);
+}
+
+.theme-light {
+	--color-base-00: var(--fc-bg-raised);
+	--color-base-05: var(--fc-bg-surface);
+	--color-base-10: var(--fc-bg-surface);
+	--color-base-20: var(--fc-bg-canvas);
+	--color-base-25: var(--fc-bg-canvas);
+	--color-base-30: var(--fc-bg-hover);
+	--color-base-35: var(--fc-border-subtle);
+	--color-base-40: var(--fc-border-subtle);
+	--color-base-50: var(--fc-text-disabled);
+	--color-base-60: var(--fc-text-muted);
+	--color-base-70: var(--fc-text-secondary);
+	--color-base-100: var(--fc-text-primary);
+}
+
+/*=== 2. Obsidian-specific rules ==================================
+ * Only what variables cannot express: field borders, state cues that do not
+ * rely on color, callout surfaces, and motion for components without a hook.
+ */
+
+/* Fields need a boundary of at least 3:1 (the default is a decorative divider). */
+textarea,
+.multi-select-container,
+input.metadata-input-text,
+input[type="date"],
+input[type="datetime-local"],
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="url"] {
+	border-color: var(--fc-border-control);
+}
+
+@media (hover: hover) {
+	textarea:where(:not(:disabled)):hover,
+	.multi-select-container:where(:not(:disabled)):hover,
+	input[type="text"]:where(:not(:disabled)):hover,
+	input[type="search"]:where(:not(:disabled)):hover,
+	input[type="number"]:where(:not(:disabled)):hover {
+		border-color: var(--fc-text-secondary);
+	}
+}
+
+button:disabled,
+button.is-disabled,
+.clickable-icon.is-disabled {
+	color: var(--fc-text-disabled);
+	cursor: not-allowed;
+}
+
+/* Primary and destructive buttons carry no inset border: the fill is the boundary. */
+button.mod-cta,
+button.mod-warning {
+	box-shadow: none;
+	color: var(--fc-accent-on);
+}
+
+button.mod-cta:hover,
+button.mod-cta:active {
+	background-color: var(--fc-accent-hover);
+	box-shadow: none;
+}
+
+button.mod-cta:active {
+	background-color: var(--fc-accent-pressed);
+}
+
+/* Current and keyboard-selected rows get a bar, so state is not color alone. */
+.tree-item-self.is-active,
+.suggestion-item.is-selected,
+.menu-item.selected:not(.is-disabled) {
+	box-shadow: inset 2px 0 0 var(--fc-accent-fg);
+}
+
+.tree-item-self.is-active:dir(rtl),
+.suggestion-item.is-selected:dir(rtl),
+.menu-item.selected:not(.is-disabled):dir(rtl) {
+	box-shadow: inset -2px 0 0 var(--fc-accent-fg);
+}
+
+/* Obsidian draws no ring on tree rows or tabs: add the Flatcap focus ring. */
+.tree-item-self:focus-visible,
+.workspace-tab-header:focus-visible,
+a:focus-visible {
+	outline: var(--fc-focus-width) solid var(--fc-focus-ring);
+	outline-offset: calc(var(--fc-focus-width) * -1);
+}
+
+a:focus-visible {
+	outline-offset: var(--fc-focus-offset);
+	border-radius: var(--fc-radius-control);
+}
+
+/* Obsidian sets the file-type flair in the explorer at 9px; the type scale stops at 13px. */
+.nav-file-tag {
+	font-size: var(--fc-font-size-meta);
+}
+
+mark,
+.cm-highlight {
+	color: var(--fc-text-primary);
+	box-shadow: inset 0 -1px 0 var(--fc-warning-fg);
+}
+
+/* Callouts: a solid semantic surface, a bar in the type color, the icon and
+ * title text carry the meaning. Defaults to the info (note) treatment. */
+.callout {
+	--fc-callout-surface: var(--fc-info-bg);
+	background-color: var(--fc-callout-surface);
+	mix-blend-mode: normal;
+	border: var(--fc-border-width) solid var(--fc-border-subtle);
+	border-inline-start: 3px solid var(--callout-color);
+}
+
+.callout[data-callout="tip"],
+.callout[data-callout="hint"],
+.callout[data-callout="success"],
+.callout[data-callout="check"],
+.callout[data-callout="done"] {
+	--fc-callout-surface: var(--fc-success-bg);
+}
+
+.callout[data-callout="question"],
+.callout[data-callout="help"],
+.callout[data-callout="faq"],
+.callout[data-callout="warning"],
+.callout[data-callout="caution"],
+.callout[data-callout="attention"] {
+	--fc-callout-surface: var(--fc-warning-bg);
+}
+
+.callout[data-callout="failure"],
+.callout[data-callout="fail"],
+.callout[data-callout="missing"],
+.callout[data-callout="danger"],
+.callout[data-callout="error"],
+.callout[data-callout="bug"] {
+	--fc-callout-surface: var(--fc-danger-bg);
+}
+
+.callout[data-callout="example"],
+.callout[data-callout="quote"],
+.callout[data-callout="cite"] {
+	--fc-callout-surface: var(--fc-bg-hover);
+}
+
+/*=== 3. Motion ===================================================
+ * Small states: --fc-motion-fast (120ms). Overlays: 160-220ms, decelerating,
+ * 4-8px of travel at most. `translate` composes with Obsidian's own transform.
+ * Obsidian already animates sidedocks, canvas and loaders; those are left alone.
+ */
+.tree-item-self,
+.workspace-tab-header,
+.menu-item,
+.suggestion-item,
+.vertical-tab-nav-item,
+.clickable-icon {
+	transition: background-color var(--fc-motion-fast) var(--fc-ease-state), color var(--fc-motion-fast) var(--fc-ease-state);
+}
+
+@keyframes fc-fade-in {
+	from {
+		opacity: 0;
+	}
+}
+
+@keyframes fc-rise-in {
+	from {
+		opacity: 0;
+		translate: 0 6px;
+	}
+}
+
+.modal-bg {
+	animation: fc-fade-in 160ms var(--fc-ease-enter) both;
+}
+
+.modal,
+.prompt {
+	animation: fc-rise-in 200ms var(--fc-ease-enter) both;
+}
+
+.menu,
+.tooltip,
+.suggestion-container {
+	animation: fc-fade-in 140ms var(--fc-ease-enter) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.modal-bg,
+	.modal,
+	.prompt,
+	.menu,
+	.tooltip,
+	.suggestion-container {
+		animation: none;
+	}
+
+	*,
+	*::before,
+	*::after {
+		transition-duration: 0s !important;
+		transition-delay: 0s !important;
+		scroll-behavior: auto !important;
+	}
+
+	/* Obsidian's springy mobile drawer entrance */
+	.workspace-drawer-tab-options:not(.is-collapsed) .workspace-drawer-tab-options-list .workspace-tab-header {
+		animation: none;
+	}
+}
+
+/*=== 4. Accessibility modes ======================================*/
+@media (prefers-contrast: more) {
+	.theme-dark,
+	.theme-light {
+		--background-modifier-border: var(--fc-border-control);
+		--divider-color: var(--fc-border-control);
+		--table-border-color: var(--fc-border-control);
+		--code-border-color: var(--fc-border-control);
+		--tab-outline-color: var(--fc-border-control);
+		--nav-indentation-guide-color: var(--fc-border-control);
+	}
+}
+
+@media (forced-colors: active) {
+	button:focus-visible,
+	select:focus-visible,
+	.dropdown:focus-visible,
+	.clickable-icon:focus-visible,
+	.text-icon-button:focus-visible,
+	.checkbox-container:focus-visible,
+	input:focus-visible,
+	textarea:focus-visible {
+		outline: var(--fc-focus-width) solid Highlight;
+		outline-offset: var(--fc-focus-offset);
+	}
+
+	.tree-item-self.is-active,
+	.suggestion-item.is-selected,
+	.menu-item.selected:not(.is-disabled) {
+		outline: 1px solid Highlight;
+		outline-offset: -1px;
+	}
+
+	.callout {
+		border-color: CanvasText;
+	}
+}

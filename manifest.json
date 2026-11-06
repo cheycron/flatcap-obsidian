@@ -1,7 +1,7 @@
 {
 	"name": "Flatcap",
-	"version": "1.1.1",
-	"minAppVersion": "1.6.1",
+	"version": "2.0.0",
+	"minAppVersion": "1.13.4",
 	"author": "Leonardo Anibal Chocron",
 	"authorUrl": "https://cheycron.com",
 	"fundingUrl": "https://buymeacoffee.com/cheycron"
