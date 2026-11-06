@@ -561,6 +561,9 @@ mark,
 	animation: fc-fade-in 140ms var(--fc-ease-enter) both;
 }
 
+/* Reduced motion: every transition of the theme runs on --fc-motion-fast, which
+ * the generated block resets to 0ms on <body>; its entrance animations are
+ * cancelled here. Same specificity as the declarations above, later in order. */
 @media (prefers-reduced-motion: reduce) {
 	.modal-bg,
 	.modal,
@@ -568,19 +571,6 @@ mark,
 	.menu,
 	.tooltip,
 	.suggestion-container {
-		animation: none;
-	}
-
-	*,
-	*::before,
-	*::after {
-		transition-duration: 0s !important;
-		transition-delay: 0s !important;
-		scroll-behavior: auto !important;
-	}
-
-	/* Obsidian's springy mobile drawer entrance */
-	.workspace-drawer-tab-options:not(.is-collapsed) .workspace-drawer-tab-options-list .workspace-tab-header {
 		animation: none;
 	}
 }

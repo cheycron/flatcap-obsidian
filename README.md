@@ -6,7 +6,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/screenshot-slate.png">
     <source media="(prefers-color-scheme: light)" srcset="images/screenshot-daylight.png">
-    <img src="images/screenshot-slate.png" alt="Obsidian with Flatcap: file explorer on the left, a note with properties, a callout, a table and a code block on the right" width="100%">
+    <img src="images/screenshot-slate.png" alt="Obsidian with Flatcap in Slate: file explorer and bookmarks on the left, a research note with properties, a callout, a code block, a table and a checklist, a local graph, and outline and backlinks on the right" width="100%">
   </picture>
 </p>
 
@@ -29,11 +29,15 @@ It is a single `theme.css` with two independently tuned modes. **Slate** is used
 
 ## Install
 
-### From the community directory
+### From the community directory (once listed)
+
+Flatcap is being submitted to the Obsidian community directory. When it appears there:
 
 1. Open **Settings → Appearance**.
 2. Under **Themes**, click **Manage**.
-3. Search for `Flatcap`, click **Install and use**.
+3. Search for `Flatcap` and click **Install and use**.
+
+Until then, use the manual install below.
 
 ### Manually
 
