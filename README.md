@@ -1,6 +1,6 @@
 # Flatcap for Obsidian
 
-![Version](https://img.shields.io/badge/version-2.0.0-blueviolet) ![Obsidian](https://img.shields.io/badge/Obsidian-1.13.4%2B-7c3aed) ![License](https://img.shields.io/badge/license-MIT-blue)
+![Version](https://img.shields.io/badge/version-2.0.1-blueviolet) ![Obsidian](https://img.shields.io/badge/Obsidian-1.13.4%2B-7c3aed) ![License](https://img.shields.io/badge/license-MIT-blue)
 
 <p align="center">
   <picture>
