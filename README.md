@@ -29,21 +29,19 @@ It is a single `theme.css` with two independently tuned modes. **Slate** is used
 
 ## Install
 
-### From the community directory (once listed)
-
-Flatcap is being submitted to the Obsidian community directory. When it appears there:
+### From the community directory (recommended)
 
 1. Open **Settings → Appearance**.
 2. Under **Themes**, click **Manage**.
-3. Search for `Flatcap` and click **Install and use**.
+3. Search for `FlatCap` and click **Install and use**.
 
-Until then, use the manual install below.
+The directory lists the theme as **FlatCap**, its original registered name. Updates arrive through Obsidian's theme updater.
 
 ### Manually
 
-1. In your vault, create the folder `.obsidian/themes/Flatcap/`.
+1. In your vault, create the folder `.obsidian/themes/FlatCap/` (the folder name must match the `name` in `manifest.json`).
 2. Copy `theme.css` and `manifest.json` from the [latest release](https://github.com/cheycron/flatcap-obsidian/releases) (or from this repository) into it.
-3. Reload Obsidian, open **Settings → Appearance → Themes** and pick **Flatcap**.
+3. Reload Obsidian, open **Settings → Appearance → Themes** and pick **FlatCap**.
 
 ## Fonts
 
